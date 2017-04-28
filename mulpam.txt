@@ -1,0 +1,4 @@
+github coalang-soft subos-io-java
+dir-create ./subos-userdata-java/standalone-src
+dir-copy ./subos-userdata-java/src ./subos-userdata-java/standalone-src
+dir-copy ./subos-io-java/src ./subos-userdata-java/standalone-src
