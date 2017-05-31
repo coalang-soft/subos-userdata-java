@@ -2,8 +2,8 @@ package cpa.subos.user;
 
 import java.io.File;
 
+import cpa.subos.io.IO;
 import cpa.subos.io.file.Directory;
-import cpa.subos.io.file.DirectoryImpl;
 
 public class UserImpl implements User {
 
@@ -12,7 +12,7 @@ public class UserImpl implements User {
 	}
 
 	public Directory getDirectory() {
-		return new DirectoryImpl(new File(System.getProperty("user.home")));
+		return IO.file(new File(System.getProperty("user.home")));
 	}
 
 }
