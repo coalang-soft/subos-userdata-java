@@ -3,7 +3,7 @@ package cpa.subos.user;
 import java.io.File;
 
 import cpa.subos.io.IO;
-import cpa.subos.io.file.Directory;
+import cpa.subos.io.file.FileIOBase;
 
 public class UserImpl implements User {
 
@@ -11,7 +11,7 @@ public class UserImpl implements User {
 		return System.getProperty("user.name");
 	}
 
-	public Directory getDirectory() {
+	public FileIOBase getDirectory() {
 		return IO.file(new File(System.getProperty("user.home")));
 	}
 

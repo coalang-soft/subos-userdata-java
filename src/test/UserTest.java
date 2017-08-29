@@ -18,7 +18,6 @@ public class UserTest {
 		u.getDirectory().listFilesDeep()
 				.filter(new FileExtensionFilter("jpg"))
 				.forEach(new Func<FileIOBase, Void>(){
-					@Override
 					public Void call(FileIOBase fileIOBase) {
 						System.out.println(fileIOBase.getPath());
 						return null;

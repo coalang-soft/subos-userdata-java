@@ -1,10 +1,10 @@
 package cpa.subos.user;
 
-import cpa.subos.io.file.Directory;
+import cpa.subos.io.file.FileIOBase;
 
 public interface User {
 
 	String getName();
-	Directory getDirectory();
+	FileIOBase getDirectory();
 	
 }
