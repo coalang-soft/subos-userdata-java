@@ -8,11 +8,11 @@ import io.github.coalangsoft.jsearch.JSearchResult;
 
 import java.util.ArrayList;
 
-public class MusicStorage extends DirectoryReadDataAccessor{
+public class SearchBasedDRDA extends DirectoryReadDataAccessor{
 
     private final ArrayList<FileIOBase> files;
 
-    public MusicStorage(ArrayList<JSearchResult<FileIOBase>> music) {
+    public SearchBasedDRDA(ArrayList<JSearchResult<FileIOBase>> music) {
         this.files = new ArrayList<FileIOBase>();
         music.forEach((f) -> f.getValue().listFilesDeep().forEach((m) -> {
             files.add(m);

@@ -5,6 +5,7 @@ import java.util.Locale;
 
 import cpa.subos.io.IO;
 import cpa.subos.io.file.FileIOBase;
+import cpa.subos.user.dataaccess.files.DirectoryReadDataAccessor;
 import io.github.coalangsoft.data.web.glosbe.translate.GlosbeTranslations;
 import io.github.coalangsoft.data.web.glosbe.translate.GlosbeTranslator;
 import io.github.coalangsoft.jsearch.JSearchEngine;
@@ -20,7 +21,7 @@ public class UserImpl implements User {
 	}
 
 	@Override
-	public MusicStorage getMusic() {
+	public SearchBasedDRDA getMusic() {
 		JSearchEngine<FileIOBase> engine = new JSearchEngine<>();
 		getDirectory().listFiles().forEach((f) -> {
 			engine.add(f.getPath(), f);
@@ -34,9 +35,9 @@ public class UserImpl implements User {
 		}
 
 		if(translated != null){
-			return new MusicStorage(engine.query(translated, "Music"));
+			return new SearchBasedDRDA(engine.query(translated, "Music"));
 		}
-		return new MusicStorage(engine.query("Music"));
+		return new SearchBasedDRDA(engine.query("Music"));
 
 	}
 
@@ -47,6 +48,26 @@ public class UserImpl implements User {
 			return null;
 		}
 		return ts.get(0).getPhraseText();
+	}
+
+	@Override
+	public DirectoryReadDataAccessor getVideos() {
+		JSearchEngine<FileIOBase> engine = new JSearchEngine<>();
+		getDirectory().listFiles().forEach((f) -> {
+			engine.add(f.getPath(), f);
+			return null;
+		});
+		String translated = null;
+		try {
+			translated = translateFor("en", "Videos");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		if(translated != null){
+			return new SearchBasedDRDA(engine.query(translated, "Videos"));
+		}
+		return new SearchBasedDRDA(engine.query("Videos"));
 	}
 
 }

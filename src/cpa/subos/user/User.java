@@ -1,16 +1,14 @@
 package cpa.subos.user;
 
 import cpa.subos.io.file.FileIOBase;
-import io.github.coalangsoft.data.web.glosbe.translate.GlosbeTranslator;
-
-import javax.script.ScriptException;
-import java.io.IOException;
+import cpa.subos.user.dataaccess.files.DirectoryReadDataAccessor;
 
 public interface User {
 
 	String getName();
 	FileIOBase getDirectory();
-	MusicStorage getMusic();
+	DirectoryReadDataAccessor getMusic();
+	DirectoryReadDataAccessor getVideos();
 	String translateFor(String from, String phrase) throws Exception;
 	
 }

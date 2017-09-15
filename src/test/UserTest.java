@@ -4,12 +4,13 @@ import java.io.File;
 import java.util.Properties;
 
 import cpa.subos.io.file.FileIOBase;
-import cpa.subos.user.MusicStorage;
+import cpa.subos.user.SearchBasedDRDA;
 import cpa.subos.user.embed.fx.FXMusicHelper;
 import io.github.coalangsoft.lib.data.Func;
 import cpa.subos.io.file.FileExtensionFilter;
 import cpa.subos.user.User;
 import cpa.subos.user.Users;
+import cpa.subos.user.dataaccess.core.ReadDataAccessorBase;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
@@ -28,7 +29,7 @@ public class UserTest extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		MusicStorage music = Users.current().getMusic();
+		ReadDataAccessorBase<FileIOBase> music = Users.current().getMusic();
 
 		BorderPane layout = new BorderPane();
 		ListView<Media> musicList = new ListView<Media>();
