@@ -9,6 +9,7 @@ public interface User {
 	FileIOBase getDirectory();
 	DirectoryReadDataAccessor getMusic();
 	DirectoryReadDataAccessor getVideos();
+	DirectoryReadDataAccessor getPictures();
 	String translateFor(String from, String phrase) throws Exception;
 	
 }

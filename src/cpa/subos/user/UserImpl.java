@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Locale;
 
 import cpa.subos.io.IO;
+import cpa.subos.io.file.FileFilters;
 import cpa.subos.io.file.FileIOBase;
 import cpa.subos.user.dataaccess.files.DirectoryReadDataAccessor;
 import io.github.coalangsoft.data.web.glosbe.translate.GlosbeTranslations;
@@ -20,8 +21,7 @@ public class UserImpl implements User {
 		return IO.file(new File(System.getProperty("user.home")));
 	}
 
-	@Override
-	public SearchBasedDRDA getMusic() {
+	private SearchBasedDRDA getSearchDir(String search){
 		JSearchEngine<FileIOBase> engine = new JSearchEngine<>();
 		getDirectory().listFiles().forEach((f) -> {
 			engine.add(f.getPath(), f);
@@ -29,16 +29,20 @@ public class UserImpl implements User {
 		});
 		String translated = null;
 		try {
-			translated = translateFor("en", "Music");
+			translated = translateFor("en", search);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		if(translated != null){
-			return new SearchBasedDRDA(engine.query(translated, "Music"));
+			return new SearchBasedDRDA(engine.query(translated, search));
 		}
-		return new SearchBasedDRDA(engine.query("Music"));
+		return new SearchBasedDRDA(engine.query(search));
+	}
 
+	@Override
+	public DirectoryReadDataAccessor getMusic() {
+		return getSearchDir("Music").filter(FileFilters.AUDIO);
 	}
 
 	@Override
@@ -52,22 +56,12 @@ public class UserImpl implements User {
 
 	@Override
 	public DirectoryReadDataAccessor getVideos() {
-		JSearchEngine<FileIOBase> engine = new JSearchEngine<>();
-		getDirectory().listFiles().forEach((f) -> {
-			engine.add(f.getPath(), f);
-			return null;
-		});
-		String translated = null;
-		try {
-			translated = translateFor("en", "Videos");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		return getSearchDir("Videos").filter(FileFilters.VIDEO);
+	}
 
-		if(translated != null){
-			return new SearchBasedDRDA(engine.query(translated, "Videos"));
-		}
-		return new SearchBasedDRDA(engine.query("Videos"));
+	@Override
+	public DirectoryReadDataAccessor getPictures() {
+		return getSearchDir("Pictures").filter(FileFilters.PICTURE);
 	}
 
 }

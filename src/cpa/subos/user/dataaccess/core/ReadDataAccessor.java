@@ -5,7 +5,7 @@ import io.github.coalangsoft.jsearch.JSearchEngine;
 public interface ReadDataAccessor<T> {
 
     int length();
-    T get(int index);
+    T at(int index);
     JSearchEngine<T> makeSearchEngine();
 
 }

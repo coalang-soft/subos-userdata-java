@@ -18,8 +18,7 @@ public class SearchBasedDRDA extends DirectoryReadDataAccessor{
             files.add(m);
             return null;
         }));
-        setFiles(files);
-        System.out.println(files);
+        values = files.toArray(new FileIOBase[0]);
     }
 
 }

@@ -14,13 +14,13 @@ import java.util.List;
 
 public class FXMusicHelper {
 
-    public static List<Media> convert(ReadDataAccessorBase<FileIOBase> music){
+    public static List<Media> convert(ReadDataAccessorBase<FileIOBase,?> music){
         ArrayList<Media> res = new ArrayList<>();
         FileExtensionFilter filter = FileFilters.AUDIO;
         for(int i = 0; i < music.length(); i++){
-            if(filter.call(music.get(i))){
+            if(filter.call(music.at(i))){
                 try {
-                    res.add(new Media(music.get(i).toUrl()));
+                    res.add(new Media(music.at(i).toUrl()));
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 }
