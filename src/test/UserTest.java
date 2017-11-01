@@ -2,7 +2,6 @@ package test;
 
 import cpa.subos.io.file.FileFilters;
 import cpa.subos.user.dataaccess.files.DirectoryReadDataAccessor;
-import cpa.subos.user.embed.fx.FXMusicHelper;
 import cpa.subos.user.Users;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -19,10 +18,7 @@ public class UserTest {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Users.current().getMusic().forEach((x) -> {
-			System.out.println(x);
-			return null;
-		});
+		Users.current().getMusic().forEach(System.out::println);
 	}
 
 }
